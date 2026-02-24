@@ -5,6 +5,7 @@ import com.finanzasapp.backend.controller.CuentaFinancieraController;
 import com.finanzasapp.backend.controller.GastoController;
 import com.finanzasapp.backend.controller.LoginController;
 import com.finanzasapp.backend.model.dto.UsuarioDTO;
+import com.finanzasapp.frontend.javafx.DashboardFX;
 import javax.swing.*;
 import java.awt.*;
 
@@ -76,16 +77,19 @@ public class MainView extends JFrame {
         JButton btnCuentas = new JButton("Cuentas");
         JButton btnCategorias = new JButton("Categorías");
         JButton btnGastos = new JButton("Gastos");
+        JButton btnDashboard = new JButton("📊 Dashboard JavaFX");
         JButton btnCerrar = new JButton("Cerrar Sesión");
         
         btnCuentas.addActionListener(e -> mostrarCuentas());
         btnCategorias.addActionListener(e -> mostrarCategorias());
         btnGastos.addActionListener(e -> mostrarGastos());
+        btnDashboard.addActionListener(e -> abrirDashboard());
         btnCerrar.addActionListener(e -> cerrarSesion());
         
         buttonPanel.add(btnCuentas);
         buttonPanel.add(btnCategorias);
         buttonPanel.add(btnGastos);
+        buttonPanel.add(btnDashboard);
         buttonPanel.add(btnCerrar);
         
         mainPanel.add(buttonPanel, BorderLayout.SOUTH);
@@ -152,6 +156,24 @@ public class MainView extends JFrame {
         contentPanel.revalidate();
         contentPanel.repaint();
         ((CardLayout) contentPanel.getLayout()).show(contentPanel, "GASTOS");
+    }
+
+    private void abrirDashboard() {
+        int opcion = JOptionPane.showConfirmDialog(this,
+            "¿Desea abrir el Dashboard JavaFX?\nSe abrirá en una nueva ventana.",
+            "Abrir Dashboard",
+            JOptionPane.YES_NO_OPTION);
+        
+        if (opcion == JOptionPane.YES_OPTION) {
+            try {
+                DashboardFX.main(new String[]{});
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this,
+                    "Error al abrir Dashboard: " + ex.getMessage(),
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE);
+            }
+        }
     }
 
     private void cerrarSesion() {

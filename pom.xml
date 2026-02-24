@@ -26,6 +26,7 @@
         <logback.version>1.4.11</logback.version>
         <lombok.version>1.18.30</lombok.version>
         <junit.version>5.10.1</junit.version>
+        <javafx.version>21.0.1</javafx.version>
     </properties>
 
     <dependencies>
@@ -170,6 +171,16 @@
                             <version>${lombok.version}</version>
                         </path>
                     </annotationProcessorPaths>
+                </configuration>
+            </plugin>
+            
+            <!-- JavaFX Plugin -->
+            <plugin>
+                <groupId>org.openjfx</groupId>
+                <artifactId>javafx-maven-plugin</artifactId>
+                <version>0.0.8</version>
+                <configuration>
+                    <mainClass>com.finanzasapp.frontend.javafx.DashboardFX</mainClass>
                 </configuration>
             </plugin>
             

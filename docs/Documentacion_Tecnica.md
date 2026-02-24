@@ -658,12 +658,53 @@ Las siguientes operaciones **deben ejecutarse dentro de una única transacción*
 
 | Tipo de Validación | Descripción | Capa |
 |--------------------|-------------|------|
-| Campos NOT NULL | Verificar campos obligatorios antes de persistir | Service + Entity |
-| Rangos numéricos | Verificar valores dentro de rangos permitidos | Service |
-| Formato email | Validar formato de email con regex | Service |
+| Campos NOT NULL | Verificar campos obligatorios antes de persistir | Validator + Service |
+| Rangos numéricos | Verificar valores dentro de rangos permitidos | Validator |
+| Formato email | Validar formato de email con regex | ValidadorUtil |
+| Longitud campos | Verificar longitud mínima/máxima | ValidadorUtil |
+| Formato username | Solo letras, números y guion bajo, 3-20 caracteres | ValidadorUtil |
+| Password | Mínimo 6 caracteres | ValidadorUtil |
+| Monto positivo | Verificar monto > 0 | GastoValidator |
+| Saldo suficiente | Verificar saldo >= monto del gasto | GastoValidator |
 | Consistencia FK | Verificar que las FK existan | Service |
 | Reglas financieras | Verificar reglas antes de modificar saldo | Service |
 | Validaciones UI | Formato, campos vacíos | View |
+
+### 6.4.1 Arquitectura desrc/main/java/com/finanzasapp Validaciones
+
+```
+/backend/
+├── validator/
+│   ├── ValidadorUtil.java           # Validaciones genéricas
+│   ├── UsuarioValidator.java         # Validaciones de Usuario
+│   ├── CuentaFinancieraValidator.java
+│   ├── CategoriaGastoValidator.java
+│   └── GastoValidator.java
+```
+
+### 6.4.2 Clases de Validación
+
+| Clase | Responsabilidad |
+|-------|-----------------|
+| **ValidadorUtil** | Validaciones genéricas: requerido, email, username, password, monto, longitud |
+| **UsuarioValidator** | Valida creación de usuarios |
+| **CuentaFinancieraValidator** | Valida creación de cuentas financieras |
+| **CategoriaGastoValidator** | Valida creación de categorías de gasto |
+| **GastoValidator** | Valida registro de gastos (monto, saldo) |
+
+### 6.4.3 Manejo de Excepciones
+
+| Excepción | Uso |
+|-----------|-----|
+| **ValidationException** | Errores de validación de datos |
+| **BusinessException** | Errores de reglas de negocio |
+
+### 6.4.4 UI de Errores
+
+```
+src/main/java/com/finanzasapp/frontend/swing/
+├── ManejadorErroresUI.java  # Mostrar errores en diálogos Swing
+```
 
 ### 6.5 Principios de Implementación
 

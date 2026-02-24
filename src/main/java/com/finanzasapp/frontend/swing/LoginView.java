@@ -1,7 +1,7 @@
-package com.finanzasapp.view.swing;
+package com.finanzasapp.frontend.swing;
 
-import com.finanzasapp.controller.LoginController;
-import com.finanzasapp.model.dto.UsuarioDTO;
+import com.finanzasapp.backend.controller.LoginController;
+import com.finanzasapp.backend.model.dto.UsuarioDTO;
 import javax.swing.*;
 import java.awt.*;
 

@@ -1,4 +1,4 @@
-package com.finanzasapp.model.dto;
+package com.finanzasapp.backend.model.dto;
 
 import java.time.LocalDateTime;
 

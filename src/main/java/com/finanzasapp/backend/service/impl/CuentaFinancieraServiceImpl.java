@@ -1,16 +1,19 @@
-package com.finanzasapp.service.impl;
+package com.finanzasapp.backend.service.impl;
 
-import com.finanzasapp.model.dto.CuentaFinancieraCreateDTO;
-import com.finanzasapp.model.dto.CuentaFinancieraDTO;
-import com.finanzasapp.model.entity.CuentaFinanciera;
-import com.finanzasapp.model.entity.Moneda;
-import com.finanzasapp.model.entity.TipoCuenta;
-import com.finanzasapp.model.entity.Usuario;
-import com.finanzasapp.repository.CuentaFinancieraRepository;
-import com.finanzasapp.repository.MonedaRepository;
-import com.finanzasapp.repository.TipoCuentaRepository;
-import com.finanzasapp.repository.UsuarioRepository;
-import com.finanzasapp.service.interfaces.ICuentaFinancieraService;
+import com.finanzasapp.backend.exception.ValidationException;
+import com.finanzasapp.backend.model.dto.CuentaFinancieraCreateDTO;
+import com.finanzasapp.backend.model.dto.CuentaFinancieraDTO;
+import com.finanzasapp.backend.model.entity.CuentaFinanciera;
+import com.finanzasapp.backend.model.entity.Moneda;
+import com.finanzasapp.backend.model.entity.TipoCuenta;
+import com.finanzasapp.backend.model.entity.Usuario;
+import com.finanzasapp.backend.repository.CuentaFinancieraRepository;
+import com.finanzasapp.backend.repository.MonedaRepository;
+import com.finanzasapp.backend.repository.TipoCuentaRepository;
+import com.finanzasapp.backend.repository.UsuarioRepository;
+import com.finanzasapp.backend.service.interfaces.ICuentaFinancieraService;
+import com.finanzasapp.backend.validator.CuentaFinancieraValidator;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -34,23 +37,33 @@ public class CuentaFinancieraServiceImpl implements ICuentaFinancieraService {
 
     @Override
     public CuentaFinancieraDTO crear(CuentaFinancieraCreateDTO dto) {
-        if (dto.getNombre() == null || dto.getNombre().trim().isEmpty()) {
-            throw new IllegalArgumentException("El nombre es obligatorio");
+        List<String> errores = CuentaFinancieraValidator.validarCreacion(dto);
+        
+        if (dto.getIdUsuario() != null && 
+            usuarioRepository.findById(dto.getIdUsuario()).isEmpty()) {
+            errores.add("Usuario no encontrado");
         }
-        if (dto.getIdUsuario() == null) {
-            throw new IllegalArgumentException("El usuario es obligatorio");
+        
+        if (dto.getIdTipoCuenta() != null && 
+            tipoCuentaRepository.findById(dto.getIdTipoCuenta()).isEmpty()) {
+            errores.add("Tipo de cuenta no encontrado");
+        }
+        
+        if (dto.getIdMoneda() != null && 
+            monedaRepository.findById(dto.getIdMoneda()).isEmpty()) {
+            errores.add("Moneda no encontrada");
+        }
+        
+        if (!errores.isEmpty()) {
+            throw new ValidationException(errores);
         }
 
-        Usuario usuario = usuarioRepository.findById(dto.getIdUsuario())
-            .orElseThrow(() -> new IllegalArgumentException("Usuario no encontrado"));
-
-        TipoCuenta tipoCuenta = tipoCuentaRepository.findById(dto.getIdTipoCuenta())
-            .orElseThrow(() -> new IllegalArgumentException("Tipo de cuenta no encontrado"));
-
-        Moneda moneda = monedaRepository.findById(dto.getIdMoneda())
-            .orElseThrow(() -> new IllegalArgumentException("Moneda no encontrada"));
+        Usuario usuario = usuarioRepository.findById(dto.getIdUsuario()).get();
+        TipoCuenta tipoCuenta = tipoCuentaRepository.findById(dto.getIdTipoCuenta()).get();
+        Moneda moneda = monedaRepository.findById(dto.getIdMoneda()).get();
 
         CuentaFinanciera cuenta = new CuentaFinanciera(usuario, dto.getNombre(), tipoCuenta, moneda);
+        cuenta.setSaldoActual(dto.getSaldoInicial() != null ? dto.getSaldoInicial() : BigDecimal.ZERO);
         cuenta = cuentaRepository.save(cuenta);
 
         return toDTO(cuenta);

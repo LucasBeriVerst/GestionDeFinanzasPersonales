@@ -14,16 +14,16 @@
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         
         <!-- Entidades JPA del proyecto -->
-        <class>com.finanzasapp.model.entity.Usuario</class>
-        <class>com.finanzasapp.model.entity.Gasto</class>
-        <class>com.finanzasapp.model.entity.Inversion</class>
-        <class>com.finanzasapp.model.entity.CuentaFinanciera</class>
-        <class>com.finanzasapp.model.entity.CategoriaGasto</class>
-        <class>com.finanzasapp.model.entity.CategoriaInversion</class>
-        <class>com.finanzasapp.model.entity.TipoCuenta</class>
-        <class>com.finanzasapp.model.entity.Moneda</class>
-        <class>com.finanzasapp.model.entity.Movimiento</class>
-        <class>com.finanzasapp.model.entity.HistorialValor</class>
+        <class>com.finanzasapp.backend.model.entity.Usuario</class>
+        <class>com.finanzasapp.backend.model.entity.Gasto</class>
+        <class>com.finanzasapp.backend.model.entity.Inversion</class>
+        <class>com.finanzasapp.backend.model.entity.CuentaFinanciera</class>
+        <class>com.finanzasapp.backend.model.entity.CategoriaGasto</class>
+        <class>com.finanzasapp.backend.model.entity.CategoriaInversion</class>
+        <class>com.finanzasapp.backend.model.entity.TipoCuenta</class>
+        <class>com.finanzasapp.backend.model.entity.Moneda</class>
+        <class>com.finanzasapp.backend.model.entity.Movimiento</class>
+        <class>com.finanzasapp.backend.model.entity.HistorialValor</class>
         
         <!-- Propiedades de la unidad de persistencia -->
         <properties>

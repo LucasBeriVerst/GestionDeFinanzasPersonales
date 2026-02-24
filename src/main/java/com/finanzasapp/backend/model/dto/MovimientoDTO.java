@@ -1,6 +1,6 @@
-package com.finanzasapp.model.dto;
+package com.finanzasapp.backend.model.dto;
 
-import com.finanzasapp.model.enums.TipoMovimiento;
+import com.finanzasapp.backend.model.enums.TipoMovimiento;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 

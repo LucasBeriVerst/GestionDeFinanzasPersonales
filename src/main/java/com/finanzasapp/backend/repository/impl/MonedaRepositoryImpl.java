@@ -1,7 +1,7 @@
-package com.finanzasapp.repository.impl;
+package com.finanzasapp.backend.repository.impl;
 
-import com.finanzasapp.model.entity.Moneda;
-import com.finanzasapp.repository.MonedaRepository;
+import com.finanzasapp.backend.model.entity.Moneda;
+import com.finanzasapp.backend.repository.MonedaRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import java.util.List;

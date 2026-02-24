@@ -1,4 +1,4 @@
-package com.finanzasapp.security;
+package com.finanzasapp.backend.security;
 
 import org.mindrot.jbcrypt.BCrypt;
 

@@ -1,16 +1,16 @@
 package com.finanzasapp;
 
-import com.finanzasapp.config.JPAConfig;
-import com.finanzasapp.controller.CategoriaGastoController;
-import com.finanzasapp.controller.CuentaFinancieraController;
-import com.finanzasapp.controller.GastoController;
-import com.finanzasapp.controller.LoginController;
-import com.finanzasapp.repository.*;
-import com.finanzasapp.repository.impl.*;
-import com.finanzasapp.service.impl.*;
-import com.finanzasapp.service.interfaces.*;
-import com.finanzasapp.view.swing.LoginView;
-import com.finanzasapp.view.swing.MainView;
+import com.finanzasapp.database.JPAConfig;
+import com.finanzasapp.backend.controller.CategoriaGastoController;
+import com.finanzasapp.backend.controller.CuentaFinancieraController;
+import com.finanzasapp.backend.controller.GastoController;
+import com.finanzasapp.backend.controller.LoginController;
+import com.finanzasapp.backend.repository.*;
+import com.finanzasapp.backend.repository.impl.*;
+import com.finanzasapp.backend.service.impl.*;
+import com.finanzasapp.backend.service.interfaces.*;
+import com.finanzasapp.frontend.swing.LoginView;
+import com.finanzasapp.frontend.swing.MainView;
 import jakarta.persistence.EntityManager;
 import javax.swing.*;
 

@@ -1,10 +1,10 @@
-package com.finanzasapp.view.swing;
+package com.finanzasapp.frontend.swing;
 
-import com.finanzasapp.controller.CategoriaGastoController;
-import com.finanzasapp.controller.CuentaFinancieraController;
-import com.finanzasapp.controller.GastoController;
-import com.finanzasapp.controller.LoginController;
-import com.finanzasapp.model.dto.UsuarioDTO;
+import com.finanzasapp.backend.controller.CategoriaGastoController;
+import com.finanzasapp.backend.controller.CuentaFinancieraController;
+import com.finanzasapp.backend.controller.GastoController;
+import com.finanzasapp.backend.controller.LoginController;
+import com.finanzasapp.backend.model.dto.UsuarioDTO;
 import javax.swing.*;
 import java.awt.*;
 

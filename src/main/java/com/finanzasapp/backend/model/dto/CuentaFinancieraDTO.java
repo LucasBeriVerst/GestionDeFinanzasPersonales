@@ -1,4 +1,4 @@
-package com.finanzasapp.model.dto;
+package com.finanzasapp.backend.model.dto;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -114,5 +114,10 @@ public class CuentaFinancieraDTO {
 
     public void setActivo(Boolean activo) {
         this.activo = activo;
+    }
+
+    @Override
+    public String toString() {
+        return nombre + " (" + saldoActual + ")";
     }
 }

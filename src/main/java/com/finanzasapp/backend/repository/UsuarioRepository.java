@@ -1,6 +1,6 @@
-package com.finanzasapp.repository;
+package com.finanzasapp.backend.repository;
 
-import com.finanzasapp.model.entity.Usuario;
+import com.finanzasapp.backend.model.entity.Usuario;
 import java.util.Optional;
 
 public interface UsuarioRepository {

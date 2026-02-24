@@ -1,9 +1,9 @@
-package com.finanzasapp.controller;
+package com.finanzasapp.backend.controller;
 
-import com.finanzasapp.model.dto.CategoriaGastoCreateDTO;
-import com.finanzasapp.model.dto.CategoriaGastoDTO;
-import com.finanzasapp.model.enums.TipoCategoria;
-import com.finanzasapp.service.interfaces.ICategoriaGastoService;
+import com.finanzasapp.backend.model.dto.CategoriaGastoCreateDTO;
+import com.finanzasapp.backend.model.dto.CategoriaGastoDTO;
+import com.finanzasapp.backend.model.enums.TipoCategoria;
+import com.finanzasapp.backend.service.interfaces.ICategoriaGastoService;
 import java.util.List;
 
 public class CategoriaGastoController {

@@ -1,12 +1,12 @@
-package com.finanzasapp.view.swing;
+package com.finanzasapp.frontend.swing;
 
-import com.finanzasapp.controller.CategoriaGastoController;
-import com.finanzasapp.controller.CuentaFinancieraController;
-import com.finanzasapp.controller.GastoController;
-import com.finanzasapp.model.dto.CategoriaGastoDTO;
-import com.finanzasapp.model.dto.CuentaFinancieraDTO;
-import com.finanzasapp.model.dto.GastoDTO;
-import com.finanzasapp.model.entity.Moneda;
+import com.finanzasapp.backend.controller.CategoriaGastoController;
+import com.finanzasapp.backend.controller.CuentaFinancieraController;
+import com.finanzasapp.backend.controller.GastoController;
+import com.finanzasapp.backend.model.dto.CategoriaGastoDTO;
+import com.finanzasapp.backend.model.dto.CuentaFinancieraDTO;
+import com.finanzasapp.backend.model.dto.GastoDTO;
+import com.finanzasapp.backend.model.entity.Moneda;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;

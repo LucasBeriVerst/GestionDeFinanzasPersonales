@@ -1,4 +1,4 @@
-package com.finanzasapp.config;
+package com.finanzasapp.database;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;

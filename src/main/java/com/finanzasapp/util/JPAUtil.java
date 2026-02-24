@@ -1,6 +1,6 @@
 package com.finanzasapp.util;
 
-import com.finanzasapp.config.JPAConfig;
+import com.finanzasapp.database.JPAConfig;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import org.slf4j.Logger;

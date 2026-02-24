@@ -1,6 +1,6 @@
-package com.finanzasapp.repository;
+package com.finanzasapp.backend.repository;
 
-import com.finanzasapp.model.entity.Movimiento;
+import com.finanzasapp.backend.model.entity.Movimiento;
 import java.util.List;
 import java.util.Optional;
 

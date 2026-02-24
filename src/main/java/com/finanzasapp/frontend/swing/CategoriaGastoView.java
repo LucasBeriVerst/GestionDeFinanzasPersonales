@@ -1,8 +1,8 @@
-package com.finanzasapp.view.swing;
+package com.finanzasapp.frontend.swing;
 
-import com.finanzasapp.controller.CategoriaGastoController;
-import com.finanzasapp.model.dto.CategoriaGastoDTO;
-import com.finanzasapp.model.enums.TipoCategoria;
+import com.finanzasapp.backend.controller.CategoriaGastoController;
+import com.finanzasapp.backend.model.dto.CategoriaGastoDTO;
+import com.finanzasapp.backend.model.enums.TipoCategoria;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;

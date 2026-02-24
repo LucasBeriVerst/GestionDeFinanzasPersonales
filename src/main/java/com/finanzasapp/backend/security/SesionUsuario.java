@@ -1,6 +1,6 @@
-package com.finanzasapp.security;
+package com.finanzasapp.backend.security;
 
-import com.finanzasapp.model.entity.Usuario;
+import com.finanzasapp.backend.model.entity.Usuario;
 
 public class SesionUsuario {
 

@@ -1,6 +1,6 @@
-package com.finanzasapp.model.entity;
+package com.finanzasapp.backend.model.entity;
 
-import com.finanzasapp.model.enums.TipoMovimiento;
+import com.finanzasapp.backend.model.enums.TipoMovimiento;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;

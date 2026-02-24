@@ -1,7 +1,7 @@
-package com.finanzasapp.service.interfaces;
+package com.finanzasapp.backend.service.interfaces;
 
-import com.finanzasapp.model.dto.CategoriaGastoCreateDTO;
-import com.finanzasapp.model.dto.CategoriaGastoDTO;
+import com.finanzasapp.backend.model.dto.CategoriaGastoCreateDTO;
+import com.finanzasapp.backend.model.dto.CategoriaGastoDTO;
 import java.util.List;
 
 public interface ICategoriaGastoService {

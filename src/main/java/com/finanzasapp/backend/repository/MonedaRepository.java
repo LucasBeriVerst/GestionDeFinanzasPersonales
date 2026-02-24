@@ -1,6 +1,6 @@
-package com.finanzasapp.repository;
+package com.finanzasapp.backend.repository;
 
-import com.finanzasapp.model.entity.Moneda;
+import com.finanzasapp.backend.model.entity.Moneda;
 import java.util.List;
 import java.util.Optional;
 

@@ -1,6 +1,6 @@
-package com.finanzasapp.model.entity;
+package com.finanzasapp.backend.model.entity;
 
-import com.finanzasapp.model.enums.NivelRiesgo;
+import com.finanzasapp.backend.model.enums.NivelRiesgo;
 import jakarta.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;

@@ -1,6 +1,6 @@
-package com.finanzasapp.model.dto;
+package com.finanzasapp.backend.model.dto;
 
-import com.finanzasapp.model.enums.TipoCategoria;
+import com.finanzasapp.backend.model.enums.TipoCategoria;
 
 public class CategoriaGastoCreateDTO {
     private String nombre;

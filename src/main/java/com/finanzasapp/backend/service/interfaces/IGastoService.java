@@ -1,7 +1,7 @@
-package com.finanzasapp.service.interfaces;
+package com.finanzasapp.backend.service.interfaces;
 
-import com.finanzasapp.model.dto.GastoCreateDTO;
-import com.finanzasapp.model.dto.GastoDTO;
+import com.finanzasapp.backend.model.dto.GastoCreateDTO;
+import com.finanzasapp.backend.model.dto.GastoDTO;
 import java.util.List;
 
 public interface IGastoService {

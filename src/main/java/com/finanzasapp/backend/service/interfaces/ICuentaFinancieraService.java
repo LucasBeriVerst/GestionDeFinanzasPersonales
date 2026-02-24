@@ -1,7 +1,7 @@
-package com.finanzasapp.service.interfaces;
+package com.finanzasapp.backend.service.interfaces;
 
-import com.finanzasapp.model.dto.CuentaFinancieraCreateDTO;
-import com.finanzasapp.model.dto.CuentaFinancieraDTO;
+import com.finanzasapp.backend.model.dto.CuentaFinancieraCreateDTO;
+import com.finanzasapp.backend.model.dto.CuentaFinancieraDTO;
 import java.util.List;
 
 public interface ICuentaFinancieraService {

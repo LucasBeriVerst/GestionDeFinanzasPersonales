@@ -1,4 +1,4 @@
-package com.finanzasapp.model.enums;
+package com.finanzasapp.backend.model.enums;
 
 public enum TipoCategoria {
     FIJO,

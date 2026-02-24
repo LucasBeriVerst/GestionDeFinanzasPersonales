@@ -1,8 +1,8 @@
-package com.finanzasapp.controller;
+package com.finanzasapp.backend.controller;
 
-import com.finanzasapp.model.dto.UsuarioDTO;
-import com.finanzasapp.service.interfaces.IAutenticacionService;
-import com.finanzasapp.service.interfaces.IUsuarioService;
+import com.finanzasapp.backend.model.dto.UsuarioDTO;
+import com.finanzasapp.backend.service.interfaces.IAutenticacionService;
+import com.finanzasapp.backend.service.interfaces.IUsuarioService;
 
 public class LoginController {
 
@@ -36,7 +36,7 @@ public class LoginController {
 
     public UsuarioDTO registrarUsuario(String username, String password, String email) {
         try {
-            com.finanzasapp.model.dto.UsuarioCreateDTO dto = new com.finanzasapp.model.dto.UsuarioCreateDTO();
+            com.finanzasapp.backend.model.dto.UsuarioCreateDTO dto = new com.finanzasapp.backend.model.dto.UsuarioCreateDTO();
             dto.setUsername(username);
             dto.setPassword(password);
             dto.setEmail(email);

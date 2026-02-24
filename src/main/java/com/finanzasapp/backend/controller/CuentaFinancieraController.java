@@ -1,8 +1,8 @@
-package com.finanzasapp.controller;
+package com.finanzasapp.backend.controller;
 
-import com.finanzasapp.model.dto.CuentaFinancieraCreateDTO;
-import com.finanzasapp.model.dto.CuentaFinancieraDTO;
-import com.finanzasapp.service.interfaces.ICuentaFinancieraService;
+import com.finanzasapp.backend.model.dto.CuentaFinancieraCreateDTO;
+import com.finanzasapp.backend.model.dto.CuentaFinancieraDTO;
+import com.finanzasapp.backend.service.interfaces.ICuentaFinancieraService;
 import java.util.List;
 
 public class CuentaFinancieraController {

@@ -1,6 +1,6 @@
-package com.finanzasapp.repository;
+package com.finanzasapp.backend.repository;
 
-import com.finanzasapp.model.entity.CategoriaGasto;
+import com.finanzasapp.backend.model.entity.CategoriaGasto;
 import java.util.List;
 import java.util.Optional;
 

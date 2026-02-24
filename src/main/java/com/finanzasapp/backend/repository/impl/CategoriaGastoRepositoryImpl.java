@@ -1,7 +1,7 @@
-package com.finanzasapp.repository.impl;
+package com.finanzasapp.backend.repository.impl;
 
-import com.finanzasapp.model.entity.CategoriaGasto;
-import com.finanzasapp.repository.CategoriaGastoRepository;
+import com.finanzasapp.backend.model.entity.CategoriaGasto;
+import com.finanzasapp.backend.repository.CategoriaGastoRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import java.util.List;

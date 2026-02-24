@@ -1,4 +1,4 @@
-package com.finanzasapp.exception;
+package com.finanzasapp.backend.exception;
 
 public class BusinessException extends RuntimeException {
     

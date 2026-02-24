@@ -1,11 +1,11 @@
-package com.finanzasapp.service.impl;
+package com.finanzasapp.backend.service.impl;
 
-import com.finanzasapp.model.dto.UsuarioDTO;
-import com.finanzasapp.model.entity.Usuario;
-import com.finanzasapp.repository.UsuarioRepository;
-import com.finanzasapp.security.EncriptadorContrasena;
-import com.finanzasapp.security.SesionUsuario;
-import com.finanzasapp.service.interfaces.IAutenticacionService;
+import com.finanzasapp.backend.model.dto.UsuarioDTO;
+import com.finanzasapp.backend.model.entity.Usuario;
+import com.finanzasapp.backend.repository.UsuarioRepository;
+import com.finanzasapp.backend.security.EncriptadorContrasena;
+import com.finanzasapp.backend.security.SesionUsuario;
+import com.finanzasapp.backend.service.interfaces.IAutenticacionService;
 
 public class AutenticacionServiceImpl implements IAutenticacionService {
 

@@ -1,4 +1,4 @@
-package com.finanzasapp.model.entity;
+package com.finanzasapp.backend.model.entity;
 
 import jakarta.persistence.*;
 import java.io.Serializable;
@@ -83,5 +83,10 @@ public class TipoCuenta implements Serializable {
 
     public void setActivo(Boolean activo) {
         this.activo = activo;
+    }
+
+    @Override
+    public String toString() {
+        return nombre;
     }
 }

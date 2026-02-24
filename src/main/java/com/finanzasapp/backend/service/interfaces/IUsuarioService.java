@@ -1,7 +1,7 @@
-package com.finanzasapp.service.interfaces;
+package com.finanzasapp.backend.service.interfaces;
 
-import com.finanzasapp.model.dto.UsuarioCreateDTO;
-import com.finanzasapp.model.dto.UsuarioDTO;
+import com.finanzasapp.backend.model.dto.UsuarioCreateDTO;
+import com.finanzasapp.backend.model.dto.UsuarioDTO;
 import java.util.List;
 
 public interface IUsuarioService {

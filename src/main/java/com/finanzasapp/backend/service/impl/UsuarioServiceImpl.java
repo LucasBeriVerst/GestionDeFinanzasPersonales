@@ -1,11 +1,14 @@
-package com.finanzasapp.service.impl;
+package com.finanzasapp.backend.service.impl;
 
-import com.finanzasapp.model.dto.UsuarioCreateDTO;
-import com.finanzasapp.model.dto.UsuarioDTO;
-import com.finanzasapp.model.entity.Usuario;
-import com.finanzasapp.repository.UsuarioRepository;
-import com.finanzasapp.security.EncriptadorContrasena;
-import com.finanzasapp.service.interfaces.IUsuarioService;
+import com.finanzasapp.backend.exception.ValidationException;
+import com.finanzasapp.backend.model.dto.UsuarioCreateDTO;
+import com.finanzasapp.backend.model.dto.UsuarioDTO;
+import com.finanzasapp.backend.model.entity.Usuario;
+import com.finanzasapp.backend.repository.UsuarioRepository;
+import com.finanzasapp.backend.security.EncriptadorContrasena;
+import com.finanzasapp.backend.service.interfaces.IUsuarioService;
+import com.finanzasapp.backend.validator.UsuarioValidator;
+import com.finanzasapp.backend.validator.ValidadorUtil;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,14 +22,14 @@ public class UsuarioServiceImpl implements IUsuarioService {
 
     @Override
     public UsuarioDTO crear(UsuarioCreateDTO dto) {
-        if (dto.getUsername() == null || dto.getUsername().trim().isEmpty()) {
-            throw new IllegalArgumentException("El username es obligatorio");
-        }
-        if (dto.getPassword() == null || dto.getPassword().isEmpty()) {
-            throw new IllegalArgumentException("El password es obligatorio");
-        }
+        List<String> errores = UsuarioValidator.validarCreacion(dto);
+        
         if (usuarioRepository.findByUsername(dto.getUsername()).isPresent()) {
-            throw new IllegalArgumentException("El username ya existe");
+            errores.add("El username ya existe");
+        }
+        
+        if (!errores.isEmpty()) {
+            throw new ValidationException(errores);
         }
 
         Usuario usuario = new Usuario();

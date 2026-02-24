@@ -1,6 +1,6 @@
-package com.finanzasapp.model.entity;
+package com.finanzasapp.backend.model.entity;
 
-import com.finanzasapp.model.enums.TipoCategoria;
+import com.finanzasapp.backend.model.enums.TipoCategoria;
 import jakarta.persistence.*;
 
 @Entity

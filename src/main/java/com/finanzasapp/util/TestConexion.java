@@ -1,9 +1,9 @@
 package com.finanzasapp.util;
 
-import com.finanzasapp.config.JPAConfig;
-import com.finanzasapp.model.entity.Moneda;
-import com.finanzasapp.model.entity.TipoCuenta;
-import com.finanzasapp.model.entity.CategoriaGasto;
+import com.finanzasapp.database.JPAConfig;
+import com.finanzasapp.backend.model.entity.Moneda;
+import com.finanzasapp.backend.model.entity.TipoCuenta;
+import com.finanzasapp.backend.model.entity.CategoriaGasto;
 import jakarta.persistence.EntityManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,10 +1,12 @@
-package com.finanzasapp.service.impl;
+package com.finanzasapp.backend.service.impl;
 
-import com.finanzasapp.model.dto.CategoriaGastoCreateDTO;
-import com.finanzasapp.model.dto.CategoriaGastoDTO;
-import com.finanzasapp.model.entity.CategoriaGasto;
-import com.finanzasapp.repository.CategoriaGastoRepository;
-import com.finanzasapp.service.interfaces.ICategoriaGastoService;
+import com.finanzasapp.backend.exception.ValidationException;
+import com.finanzasapp.backend.model.dto.CategoriaGastoCreateDTO;
+import com.finanzasapp.backend.model.dto.CategoriaGastoDTO;
+import com.finanzasapp.backend.model.entity.CategoriaGasto;
+import com.finanzasapp.backend.repository.CategoriaGastoRepository;
+import com.finanzasapp.backend.service.interfaces.ICategoriaGastoService;
+import com.finanzasapp.backend.validator.CategoriaGastoValidator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,11 +20,14 @@ public class CategoriaGastoServiceImpl implements ICategoriaGastoService {
 
     @Override
     public CategoriaGastoDTO crear(CategoriaGastoCreateDTO dto) {
-        if (dto.getNombre() == null || dto.getNombre().trim().isEmpty()) {
-            throw new IllegalArgumentException("El nombre es obligatorio");
-        }
+        List<String> errores = CategoriaGastoValidator.validarCreacion(dto);
+        
         if (categoriaRepository.findByNombre(dto.getNombre()).isPresent()) {
-            throw new IllegalArgumentException("Ya existe una categoría con ese nombre");
+            errores.add("Ya existe una categoría con ese nombre");
+        }
+        
+        if (!errores.isEmpty()) {
+            throw new ValidationException(errores);
         }
 
         CategoriaGasto categoria = new CategoriaGasto();

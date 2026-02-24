@@ -1,6 +1,6 @@
-package com.finanzasapp.repository;
+package com.finanzasapp.backend.repository;
 
-import com.finanzasapp.model.entity.TipoCuenta;
+import com.finanzasapp.backend.model.entity.TipoCuenta;
 import java.util.List;
 import java.util.Optional;
 

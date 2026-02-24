@@ -1,7 +1,7 @@
-package com.finanzasapp.repository.impl;
+package com.finanzasapp.backend.repository.impl;
 
-import com.finanzasapp.model.entity.TipoCuenta;
-import com.finanzasapp.repository.TipoCuentaRepository;
+import com.finanzasapp.backend.model.entity.TipoCuenta;
+import com.finanzasapp.backend.repository.TipoCuentaRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import java.util.List;

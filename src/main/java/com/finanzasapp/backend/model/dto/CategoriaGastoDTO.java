@@ -1,6 +1,6 @@
-package com.finanzasapp.model.dto;
+package com.finanzasapp.backend.model.dto;
 
-import com.finanzasapp.model.enums.TipoCategoria;
+import com.finanzasapp.backend.model.enums.TipoCategoria;
 
 public class CategoriaGastoDTO {
     private Long id;
@@ -68,5 +68,10 @@ public class CategoriaGastoDTO {
 
     public void setActivo(Boolean activo) {
         this.activo = activo;
+    }
+
+    @Override
+    public String toString() {
+        return nombre;
     }
 }

@@ -1,21 +1,23 @@
-package com.finanzasapp.service.impl;
+package com.finanzasapp.backend.service.impl;
 
-import com.finanzasapp.model.dto.GastoCreateDTO;
-import com.finanzasapp.model.dto.GastoDTO;
-import com.finanzasapp.model.entity.CategoriaGasto;
-import com.finanzasapp.model.entity.CuentaFinanciera;
-import com.finanzasapp.model.entity.Gasto;
-import com.finanzasapp.model.entity.Moneda;
-import com.finanzasapp.model.entity.Movimiento;
-import com.finanzasapp.model.entity.Usuario;
-import com.finanzasapp.model.enums.TipoMovimiento;
-import com.finanzasapp.repository.CategoriaGastoRepository;
-import com.finanzasapp.repository.CuentaFinancieraRepository;
-import com.finanzasapp.repository.GastoRepository;
-import com.finanzasapp.repository.MonedaRepository;
-import com.finanzasapp.repository.MovimientoRepository;
-import com.finanzasapp.repository.UsuarioRepository;
-import com.finanzasapp.service.interfaces.IGastoService;
+import com.finanzasapp.backend.exception.ValidationException;
+import com.finanzasapp.backend.model.dto.GastoCreateDTO;
+import com.finanzasapp.backend.model.dto.GastoDTO;
+import com.finanzasapp.backend.model.entity.CategoriaGasto;
+import com.finanzasapp.backend.model.entity.CuentaFinanciera;
+import com.finanzasapp.backend.model.entity.Gasto;
+import com.finanzasapp.backend.model.entity.Moneda;
+import com.finanzasapp.backend.model.entity.Movimiento;
+import com.finanzasapp.backend.model.entity.Usuario;
+import com.finanzasapp.backend.model.enums.TipoMovimiento;
+import com.finanzasapp.backend.repository.CategoriaGastoRepository;
+import com.finanzasapp.backend.repository.CuentaFinancieraRepository;
+import com.finanzasapp.backend.repository.GastoRepository;
+import com.finanzasapp.backend.repository.MonedaRepository;
+import com.finanzasapp.backend.repository.MovimientoRepository;
+import com.finanzasapp.backend.repository.UsuarioRepository;
+import com.finanzasapp.backend.service.interfaces.IGastoService;
+import com.finanzasapp.backend.validator.GastoValidator;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import java.math.BigDecimal;
@@ -51,21 +53,29 @@ public class GastoServiceImpl implements IGastoService {
 
     @Override
     public GastoDTO crear(GastoCreateDTO dto) {
-        EntityTransaction tx = em.getTransaction();
+        List<String> errores = GastoValidator.validarCreacion(dto);
         
-        if (dto.getMonto() == null || dto.getMonto().compareTo(BigDecimal.ZERO) <= 0) {
-            throw new IllegalArgumentException("El monto debe ser mayor a 0");
+        if (dto.getIdUsuario() != null && 
+            usuarioRepository.findById(dto.getIdUsuario()).isEmpty()) {
+            errores.add("Usuario no encontrado");
         }
-        if (dto.getIdUsuario() == null) {
-            throw new IllegalArgumentException("El usuario es obligatorio");
+        
+        if (dto.getIdCuenta() != null && 
+            cuentaRepository.findById(dto.getIdCuenta()).isEmpty()) {
+            errores.add("Cuenta no encontrada");
         }
-        if (dto.getIdCuenta() == null) {
-            throw new IllegalArgumentException("La cuenta es obligatoria");
+        
+        if (dto.getIdCategoria() != null && 
+            categoriaRepository.findById(dto.getIdCategoria()).isEmpty()) {
+            errores.add("Categoría no encontrada");
         }
-        if (dto.getIdCategoria() == null) {
-            throw new IllegalArgumentException("La categoría es obligatoria");
+        
+        if (!errores.isEmpty()) {
+            throw new ValidationException(errores);
         }
 
+        EntityTransaction tx = em.getTransaction();
+        
         try {
             tx.begin();
 

@@ -1,4 +1,4 @@
-package com.finanzasapp.model.entity;
+package com.finanzasapp.backend.model.entity;
 
 import jakarta.persistence.*;
 import java.util.ArrayList;

@@ -1,11 +1,11 @@
-package com.finanzasapp.view.swing;
+package com.finanzasapp.frontend.swing;
 
-import com.finanzasapp.controller.CuentaFinancieraController;
-import com.finanzasapp.model.dto.CuentaFinancieraDTO;
-import com.finanzasapp.model.entity.Moneda;
-import com.finanzasapp.model.entity.TipoCuenta;
-import com.finanzasapp.repository.MonedaRepository;
-import com.finanzasapp.repository.TipoCuentaRepository;
+import com.finanzasapp.backend.controller.CuentaFinancieraController;
+import com.finanzasapp.backend.model.dto.CuentaFinancieraDTO;
+import com.finanzasapp.backend.model.entity.Moneda;
+import com.finanzasapp.backend.model.entity.TipoCuenta;
+import com.finanzasapp.backend.repository.MonedaRepository;
+import com.finanzasapp.backend.repository.TipoCuentaRepository;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -318,13 +318,13 @@ public class CuentaFinancieraView extends JPanel {
     }
 
     private List<TipoCuenta> getTipoCuentas() {
-        return com.finanzasapp.config.JPAConfig.getEntityManager()
+        return com.finanzasapp.database.JPAConfig.getEntityManager()
             .createQuery("SELECT t FROM TipoCuenta t WHERE t.activo = true", TipoCuenta.class)
             .getResultList();
     }
 
     private List<Moneda> getMonedas() {
-        return com.finanzasapp.config.JPAConfig.getEntityManager()
+        return com.finanzasapp.database.JPAConfig.getEntityManager()
             .createQuery("SELECT m FROM Moneda m WHERE m.activa = true", Moneda.class)
             .getResultList();
     }

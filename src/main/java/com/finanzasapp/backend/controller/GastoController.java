@@ -1,8 +1,8 @@
-package com.finanzasapp.controller;
+package com.finanzasapp.backend.controller;
 
-import com.finanzasapp.model.dto.GastoCreateDTO;
-import com.finanzasapp.model.dto.GastoDTO;
-import com.finanzasapp.service.interfaces.IGastoService;
+import com.finanzasapp.backend.model.dto.GastoCreateDTO;
+import com.finanzasapp.backend.model.dto.GastoDTO;
+import com.finanzasapp.backend.service.interfaces.IGastoService;
 import java.math.BigDecimal;
 import java.util.List;
 

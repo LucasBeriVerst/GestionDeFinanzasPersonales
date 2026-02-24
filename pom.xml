@@ -135,12 +135,26 @@
             <version>1.5.4</version>
         </dependency>
 
-        <!-- ==================== JAVAFX (OPCIONAL) ==================== -->
+        <!-- ==================== JAVAFX (Para embeber en Swing) ==================== -->
         
-        <!-- JavaFX Controls (para dashboard standalone) -->
+        <!-- JavaFX Controls -->
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
+            <version>21.0.1</version>
+        </dependency>
+        
+        <!-- JavaFX Graphics -->
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-graphics</artifactId>
+            <version>21.0.1</version>
+        </dependency>
+        
+        <!-- JavaFX Swing (embeber en Swing) -->
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-swing</artifactId>
             <version>21.0.1</version>
         </dependency>
 

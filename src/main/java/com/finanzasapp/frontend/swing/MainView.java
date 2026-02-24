@@ -161,7 +161,7 @@ public class MainView extends JFrame {
         try {
             contentPanel.removeAll();
             
-            DashboardPanel dashboard = new DashboardPanel();
+            DashboardFXPanel dashboard = new DashboardFXPanel();
             dashboard.setName("DASHBOARD");
             
             JButton btnVolver = new JButton("← Volver");

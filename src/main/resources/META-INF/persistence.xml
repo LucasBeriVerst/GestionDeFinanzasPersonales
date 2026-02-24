@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="3.0" 
+    xmlns="https://jakarta.ee/xml/ns/persistence" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence 
+                        https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd">
+
+    <!-- ===================================================== -->
+    <!-- UNIDAD DE PERSISTENCIA - FINANZASAPP                -->
+    <!-- ===================================================== -->
+    <persistence-unit name="FinanzasAppPU" transaction-type="RESOURCE_LOCAL">
+        
+        <!-- Proveedor de persistencia (Hibernate) -->
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        
+        <!-- Entidades JPA del proyecto -->
+        <class>com.finanzasapp.model.entity.Usuario</class>
+        <class>com.finanzasapp.model.entity.Gasto</class>
+        <class>com.finanzasapp.model.entity.Inversion</class>
+        <class>com.finanzasapp.model.entity.CuentaFinanciera</class>
+        <class>com.finanzasapp.model.entity.CategoriaGasto</class>
+        <class>com.finanzasapp.model.entity.CategoriaInversion</class>
+        <class>com.finanzasapp.model.entity.TipoCuenta</class>
+        <class>com.finanzasapp.model.entity.Moneda</class>
+        <class>com.finanzasapp.model.entity.Movimiento</class>
+        <class>com.finanzasapp.model.entity.HistorialValor</class>
+        
+        <!-- Propiedades de la unidad de persistencia -->
+        <properties>
+            
+            <!-- ==================== CONEXIÓN A BASE DE DATOS ==================== -->
+            
+            <!-- Driver JDBC -->
+            <property name="jakarta.persistence.jdbc.driver" 
+                      value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
+            
+            <!-- URL de conexión SQL Server - SQL Authentication -->
+            <property name="jakarta.persistence.jdbc.url" 
+                      value="jdbc:sqlserver://DESKTOP-GO1RSK2\\SQLEXPRESS:60648;database=FinanzasDB;encrypt=false;trustServerCertificate=true"/>
+            
+            <!-- Usuario y Password SQL -->
+            <property name="jakarta.persistence.jdbc.user" value="sa"/>
+            <property name="jakarta.persistence.jdbc.password" value="DelfiP@wer13"/>
+            
+            <!-- ==================== HIBERNATE CONFIGURATION ==================== -->
+            
+            <!-- Dialecto SQL Server -->
+            <property name="hibernate.dialect" 
+                      value="org.hibernate.dialect.SQLServerDialect"/>
+            
+            <!-- Pool de conexiones HikariCP -->
+            <property name="hibernate.hikari.connectionProvider" 
+                      value="org.hibernate.hikari.internal.HikariCPConnectionProvider"/>
+            
+            <!-- Configuración HikariCP -->
+            <property name="hibernate.hikari.minimumIdle" value="5"/>
+            <property name="hibernate.hikari.maximumPoolSize" value="20"/>
+            <property name="hibernate.hikari.idleTimeout" value="300000"/>
+            <property name="hibernate.hikari.connectionTimeout" value="20000"/>
+            <property name="hibernate.hikari.maxLifetime" value="1800000"/>
+            
+            <!-- ==================== HIBERNATE DDL (ESQUEMA) ==================== -->
+            
+            <!-- auto: actualiza esquema automáticamente (update para desarrollo) -->
+            <!-- Valores: none, create, create-drop, update, validate -->
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+            
+            <!-- ==================== SQL DEBUGGING ==================== -->
+            
+            <!-- Mostrar SQL en consola -->
+            <property name="hibernate.show_sql" value="false"/>
+            
+            <!-- Formatear SQL -->
+            <property name="hibernate.format_sql" value="true"/>
+            
+            <!-- Comentarios en SQL -->
+            <property name="hibernate.use_sql_comments" value="false"/>
+            
+            <!-- ==================== CACHÉ DE SEGUNDO NIVELO ==================== -->
+            
+            <!-- Habilitar caché de segundo nivel -->
+            <property name="hibernate.cache.use_second_level_cache" value="false"/>
+            
+            <!-- Proveedor de caché -->
+            <property name="hibernate.cache.region.factory_class" 
+                      value="org.hibernate.cache.jcache.JCacheRegionFactory"/>
+            
+            <!-- ==================== TRANSACCIONES Y Flush ==================== -->
+            
+            <!-- Flush mode -->
+            <property name="hibernate.flushMode" value="COMMIT"/>
+            
+            <!-- Orden de propiedades en SQL -->
+            <property name="hibernate.order_inserts" value="true"/>
+            <property name="hibernate.order_updates" value="true"/>
+            
+            <!-- ==================== BATCH OPERATIONS ==================== -->
+            
+            <!-- Tamaño de batch -->
+            <property name="hibernate.jdbc.batch_size" value="20"/>
+            <property name="hibernate.order_by.nulls.last" value="true"/>
+            
+            <!-- ==================== TIEMPO Y ZONA HORARIA ==================== -->
+            
+            <!-- Timezone UTC para consistencia -->
+            <property name="hibernate.jdbc.time_zone" value="UTC"/>
+            
+            <!-- ==================== PROPIEDADES DE ESCALABILIDAD ==================== -->
+            
+            <!-- Generar estadísticas -->
+            <property name="hibernate.generate_statistics" value="false"/>
+            
+            <!-- Usar bytecode enhancement -->
+            <property name="hibernate.bytecode.provider" value="javassist"/>
+            
+            <!-- ==================== NOMBRADO DE IDENTIFICADORES ==================== -->
+            
+            <!-- Estrategia de nomenclatura por defecto (Hibernate 6) -->
+            <!-- No es necesario especificar, Hibernate usa la estrategia por defecto -->
+            
+            <!-- Physical naming strategy -->
+            <property name="hibernate.physical_naming_strategy" 
+                      value="org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl"/>
+            
+        </properties>
+    </persistence-unit>
+
+</persistence>

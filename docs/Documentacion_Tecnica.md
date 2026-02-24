@@ -200,16 +200,11 @@ View ──► Controller ──► Service ──► Repository ── Base de 
 
 | Paquete | Depende de | No depende de |
 |---------|------------|---------------|
-| **view.swing** | controller, model.dto | service, repository, model.entity |
-| **view.javafx** | controller, model.dto | service, repository, model.entity |
-| **controller** | service, model.dto | repository, model.entity |
-| **service** | repository, validator, model.entity, model.dto | view, controller |
-| **repository** | model.entity | service, controller, view |
-| **validator** | model.dto, util | repository, service, view |
-| **security** | model.entity, util | view, controller, service |
-| **exception** | util | (mínimo acoplamiento) |
-| **report** | service, model.dto | repository, view |
-| **config** | (configuración pura) | (ninguna capa de negocio) |
+| **frontend** | backend.controller | backend.service, backend.repository, backend.model.entity |
+| **backend.controller** | backend.service, backend.model.dto | backend.repository, backend.model.entity |
+| **backend.service** | backend.repository, backend.model.entity, backend.model.dto | frontend, backend.controller |
+| **backend.repository** | backend.model.entity | backend.service, backend.controller, frontend |
+| **database** | (configuración pura) | (ninguna capa de negocio) |
 
 #### Objetivos de Diseño
 
@@ -238,60 +233,98 @@ src/main/java/com/finanzasapp/
 │
 ├── Main.java                                    # Punto de entrada aplicación
 │
-├── config/                                       # Configuración JPA, BD y framework
-│   ├── JpaConfig.java                           # Configuración EntityManager
-│   ├── DatabaseConfig.java                     # Configuración conexión BD
-│   └── FxConfig.java                            # Configuración JavaFX
+├── database/                                   # Configuración de base de datos
+│   └── JPAConfig.java                          # Configuración EntityManager
 │
-├── controller/                                   # Coordinación entre View y Service
-│   ├── LoginController.java                     # Controlador de autenticación
-│   ├── GastoController.java                     # Controlador de gastos
-│   ├── InversionController.java                 # Controlador de inversiones
-│   ├── CuentaFinancieraController.java          # Controlador de cuentas
-│   ├── DashboardController.java                 # Controlador del dashboard
-│   └── MainController.java                      # Controlador principal
+├── backend/                                    # Lógica de negocio (MVC)
+│   ├── model/
+│   │   ├── entity/                             # Entidades JPA persistentes
+│   │   │   ├── BaseEntity.java                # Superclase entidades
+│   │   │   ├── Usuario.java
+│   │   │   ├── Gasto.java
+│   │   │   ├── Inversion.java
+│   │   │   ├── CuentaFinanciera.java
+│   │   │   ├── CategoriaGasto.java
+│   │   │   ├── CategoriaInversion.java
+│   │   │   ├── TipoCuenta.java
+│   │   │   ├── Moneda.java
+│   │   │   ├── Movimiento.java
+│   │   │   └── HistorialValor.java
+│   │   │
+│   │   ├── dto/                               # Objetos de transferencia de datos
+│   │   │   ├── UsuarioDTO.java
+│   │   │   ├── UsuarioCreateDTO.java
+│   │   │   ├── GastoDTO.java
+│   │   │   ├── GastoCreateDTO.java
+│   │   │   ├── CuentaFinancieraDTO.java
+│   │   │   ├── CuentaFinancieraCreateDTO.java
+│   │   │   ├── CategoriaGastoDTO.java
+│   │   │   ├── CategoriaGastoCreateDTO.java
+│   │   │   └── MovimientoDTO.java
+│   │   │
+│   │   └── enums/                             # Enumeraciones del sistema
+│   │       ├── TipoCategoria.java              # FIJO, VARIABLE, OCASIONAL
+│   │       ├── NivelRiesgo.java               # BAJO, MEDIO, ALTO
+│   │       └── TipoMovimiento.java            # ENTRADA, SALIDA
+│   │
+│   ├── repository/                            # Interfaces de acceso a datos
+│   │   ├── impl/                              # Implementaciones
+│   │   │   ├── UsuarioRepositoryImpl.java
+│   │   │   ├── GastoRepositoryImpl.java
+│   │   │   ├── CuentaFinancieraRepositoryImpl.java
+│   │   │   ├── CategoriaGastoRepositoryImpl.java
+│   │   │   ├── MovimientoRepositoryImpl.java
+│   │   │   ├── MonedaRepositoryImpl.java
+│   │   │   └── TipoCuentaRepositoryImpl.java
+│   │   │
+│   │   ├── UsuarioRepository.java
+│   │   ├── GastoRepository.java
+│   │   ├── CuentaFinancieraRepository.java
+│   │   ├── CategoriaGastoRepository.java
+│   │   ├── MovimientoRepository.java
+│   │   ├── MonedaRepository.java
+│   │   └── TipoCuentaRepository.java
+│   │
+│   ├── service/                               # Lógica de negocio
+│   │   ├── interfaces/                         # Contratos de servicio
+│   │   │   ├── IUsuarioService.java
+│   │   │   ├── IGastoService.java
+│   │   │   ├── ICuentaFinancieraService.java
+│   │   │   ├── ICategoriaGastoService.java
+│   │   │   └── IAutenticacionService.java
+│   │   │
+│   │   └── impl/                              # Implementaciones
+│   │       ├── UsuarioServiceImpl.java
+│   │       ├── GastoServiceImpl.java
+│   │       ├── CuentaFinancieraServiceImpl.java
+│   │       ├── CategoriaGastoServiceImpl.java
+│   │       └── AutenticacionServiceImpl.java
+│   │
+│   ├── controller/                             # Coordinación View ↔ Service
+│   │   ├── LoginController.java
+│   │   ├── GastoController.java
+│   │   ├── CuentaFinancieraController.java
+│   │   └── CategoriaGastoController.java
+│   │
+│   ├── security/                               # Seguridad y autenticación
+│   │   ├── EncriptadorContrasena.java        # Hash BCrypt
+│   │   └── SesionUsuario.java                  # Gestión de sesión
+│   │
+│   └── exception/                             # Excepciones personalizadas
+│       ├── BusinessException.java
+│       └── ValidationException.java
 │
-├── model/                                       
-│   ├── entity/                                  # Entidades JPA persistentes
-│   │   ├── Usuario.java
-│   │   ├── Gasto.java
-│   │   ├── Inversion.java
-│   │   ├── CuentaFinanciera.java
-│   │   ├── CategoriaGasto.java
-│   │   ├── CategoriaInversion.java
-│   │   ├── TipoCuenta.java
-│   │   ├── Moneda.java
-│   │   ├── Movimiento.java
-│   │   └── HistorialValor.java
-│   │
-│   ├── dto/                                     # Objetos de transferencia de datos
-│   │   ├── UsuarioDTO.java
-│   │   ├── GastoDTO.java
-│   │   ├── InversionDTO.java
-│   │   ├── CuentaFinancieraDTO.java
-│   │   ├── ResumenFinancieroDTO.java
-│   │   └── EstadisticasDTO.java
-│   │
-│   └── enums/                                   # Enumeraciones del sistema
-│       ├── TipoCategoria.java                   # FIJO, VARIABLE, OCASIONAL
-│       ├── NivelRiesgo.java                     # BAJO, MEDIO, ALTO
-│       └── TipoMovimiento.java                  # ENTRADA, SALIDA
+├── frontend/                                   # Interfaz de usuario
+│   └── swing/                                 # GUI Swing
+│       ├── LoginView.java
+│       ├── MainView.java
+│       ├── GastoView.java
+│       ├── CuentaFinancieraView.java
+│       └── CategoriaGastoView.java
 │
-├── repository/                                  # Interfaces de acceso a datos
-│   ├── impl/                                      # Implementaciones
-│   │   ├── UsuarioRepositoryImpl.java
-│   │   ├── GastoRepositoryImpl.java
-│   │   ├── InversionRepositoryImpl.java
-│   │   ├── CuentaFinancieraRepositoryImpl.java
-│   │   ├── CategoriaGastoRepositoryImpl.java
-│   │   ├── CategoriaInversionRepositoryImpl.java
-│   │   ├── TipoCuentaRepositoryImpl.java
-│   │   ├── MonedaRepositoryImpl.java
-│   │   ├── MovimientoRepositoryImpl.java
-│   │   └── HistorialValorRepositoryImpl.java
-│   │
-│   ├── UsuarioRepository.java
-│   ├── GastoRepository.java
+└── util/                                       # Utilidades
+    └── JPAUtil.java
+```
 │   ├── InversionRepository.java
 │   ├── CuentaFinancieraRepository.java
 │   ├── CategoriaGastoRepository.java
@@ -374,54 +407,92 @@ src/main/java/com/finanzasapp/
 ### 4.3 Dependencias entre Paquetes
 
 ```
-                    ┌────────────────────────────────────┐
-                    │              VIEW                  │
-                    │  (view.swing, view.javafx)        │
-                    │   Solo presentación y UI          │
-                    └──────────────┬───────────────────┘
-                                   │
-                    ┌──────────────▼───────────────────┐
-                    │           CONTROLLER              │
-                    │   Coordina flujo UI ↔ Service    │
-                    └──────────────┬───────────────────┘
-                                   │
-                    ┌──────────────▼───────────────────┐
-                    │            SERVICE                │
-                    │  Lógica de negocio + transacciones│
-                    │  + validación (usa validator)     │
-                    └──────────────┬───────────────────┘
-                                   │
-                    ┌──────────────▼───────────────────┐
-                    │          REPOSITORY               │
-                    │   Acceso a datos JPA             │
-                    └──────────────┬───────────────────┘
-                                   │
-                    ┌──────────────▼───────────────────┐
-                    │         BASE DE DATOS             │
-                    │           SQL Server              │
-                    └──────────────────────────────────┘
-
-    ┌─────────────┐     ┌──────────────┐     ┌───────────┐
-    │   SECURITY  │────►│    MODEL     │◄────│  VALIDATOR│
-    │ (independiente)   │  (entidades)  │     │(utilitario)│
-    └─────────────┘     └──────────────┘     └───────────┘
+┌─────────────────────────────────────────────────────────────────────┐
+│                         FRONTEND (Swing)                            │
+│   LoginView │ MainView │ GastoView │ CuentaView │ CategoriaView   │
+└─────────────────────────────┬───────────────────────────────────────┘
+                              │
+                              ▼
+┌─────────────────────────────────────────────────────────────────────┐
+│                       BACKEND - CONTROLLER                           │
+│  LoginController │ GastoController │ CuentaController │ Categoria  │
+└─────────────────────────────┬───────────────────────────────────────┘
+                              │
+                              ▼
+┌─────────────────────────────────────────────────────────────────────┐
+│                       BACKEND - SERVICE                              │
+│  UsuarioService │ GastoService │ CuentaService │ CategoriaService  │
+│                         (Lógica de negocio)                         │
+└─────────────────────────────┬───────────────────────────────────────┘
+                              │
+                              ▼
+┌─────────────────────────────────────────────────────────────────────┐
+│                       BACKEND - REPOSITORY                          │
+│  UsuarioRepo │ GastoRepo │ CuentaRepo │ MovimientoRepo              │
+│                      (JPA / Hibernate)                              │
+└─────────────────────────────┬───────────────────────────────────────┘
+                              │
+                              ▼
+┌─────────────────────────────────────────────────────────────────────┐
+│                         DATABASE                                    │
+│                     SQL Server - FinanzasDB                         │
+└─────────────────────────────────────────────────────────────────────┘
 
     ┌─────────────┐     ┌──────────────┐
-    │   EXCEPTION │◄────│   SERVICE    │
-    │(manejo err) │     │   y REPO    │
+    │   SECURITY  │     │   EXCEPTION  │
+    │(backend)   │     │  (backend)   │
     └─────────────┘     └──────────────┘
 
-    ┌─────────────┐
-    │    REPORT   │
-    │(consume Service)│
-    └─────────────┘
+┌─────────────┐     ┌──────────────┐     ┌───────────┐
+│  DATABASE  │     │    MODEL     │     │   UTIL    │
+│(JPA Config)│     │(backend)     │     │ (shared)  │
+└─────────────┘     └──────────────┘     └───────────┘
 ```
 
 ---
 
 ## 5. Responsabilidades por Capa
 
-### 5.1 Model / Entity
+### 5.1 Frontend (Swing)
+
+| Responsabilidad | Restricciones |
+|-----------------|---------------|
+| Renderizado de interfaz | Solo presentación |
+| Captura de input del usuario | Sin lógica de negocio |
+| Validaciones básicas de formato | Formato email, campos vacíos, números |
+| Mostrar mensajes al usuario | Siempre a través de Controller |
+| Dependencias | Solo backend.controller, backend.model.dto |
+
+### 5.2 Backend - Controller
+
+| Responsabilidad | Restricciones |
+|-----------------|---------------|
+| Recibir eventos de View | Solo flujo y coordinación |
+| Traducir acciones a llamadas Service | Sin lógica de negocio |
+| Devolver respuesta a View (DTOs) | No acceder directamente a Repository |
+| Dependencias | Solo backend.service, backend.model.dto |
+
+### 5.3 Backend - Service
+
+| Responsabilidad | Restricciones |
+|-----------------|---------------|
+| **Toda la lógica del sistema** | Ninguna lógica en otras capas |
+| Validaciones de negocio | Campos obligatorios, reglas específicas |
+| Transacciones | @Transactional obligatorio |
+| Coordinar múltiples repositories | Usar interfaces |
+| Dependencias | Solo backend.repository, backend.model.entity |
+
+### 5.4 Backend - Repository
+
+| Responsabilidad | Restricciones |
+|-----------------|---------------|
+| Acceso a datos persistence | Interfaz + Implementación |
+| Consultas JPQL/SQL | Solo operaciones CRUD |
+| Abstracción de la base de datos | Cambiar BD sin afectar Service |
+| Sin lógica de negocio | Delegar a Service |
+| Dependencias | Solo backend.model.entity |
+
+### 5.5 Backend - Model / Entity
 
 | Responsabilidad | Restricciones |
 |-----------------|---------------|
@@ -431,43 +502,21 @@ src/main/java/com/finanzasapp/
 | Sin lógica de negocio | Solo getters/setters |
 | Sin dependencias de otras capas | Reutilizable en cualquier entorno |
 
-### 5.2 Repository
+### 5.6 Backend - Exception
 
 | Responsabilidad | Restricciones |
 |-----------------|---------------|
-| Acceso a datos persistence | Interfaz + Implementación |
-| Consultas JPQL/SQL | Solo operaciones CRUD |
-| Abstracción de la base de datos | Cambiar BD sin afectar Service |
-| Sin lógica de negocio | Delegar a Service |
+| Manejo centralizado de errores | Jerarquía personalizada |
+| Propagación controlada | Entre capas |
+| Mensajes amigables al usuario | Traducibles |
 
-### 5.3 Service
-
-| Responsabilidad | Restricciones |
-|-----------------|---------------|
-| **Toda la lógica del sistema** | Ninguna lógica en otras capas |
-| Validaciones de negocio | Campos obligatorios, reglas específicas |
-| Transacciones | @Transactional obligatorio |
-| Coordinar múltiples repositories | Usar interfaces |
-
-### 5.4 Controller
+### 5.7 Database (JPA Config)
 
 | Responsabilidad | Restricciones |
 |-----------------|---------------|
-| Recibir eventos de View | Solo flujo y coordinación |
-| Traducir acciones a llamadas Service | Sin lógica de negocio |
-| Devolver respuesta a View | No acceder directamente a Repository |
-| Manejo de navegación | Delega a ExceptionHandler |
-
-### 5.5 View
-
-| Responsabilidad | Restricciones |
-|-----------------|---------------|
-| Renderizado de interfaz | Solo presentación |
-| Captura de input del usuario | Sin lógica de negocio |
-| Validaciones básicas de formato | Formato email, campos vacíos, números |
-| Mostrar mensajes al usuario | Siempre a través de Controller |
-
-### 5.6 Exception
+| Configuración EntityManager | Solo en database/ |
+| Conexión a BD | Abstraída del resto |
+| Sin lógica de negocio | Solo configuración |
 
 | Responsabilidad | Restricciones |
 |-----------------|---------------|
@@ -1087,6 +1136,12 @@ jdbc:sqlserver://localhost:1433;database=FinanzasDB;encrypt=false;trustServerCer
 | | | - mssql-jdbc 12.6.1.jre11 |
 | | | - Agregadas: HikariCP, Hibernate Validator, Logback |
 | | | - Jakarta Persistence 3.1.0 |
+| 1.6 | 23/02/2026 | Reorganización estructura del proyecto |
+| | | - Nueva estructura: database/, backend/, frontend/ |
+| | | - backend/: model, repository, service, controller, security, exception |
+| | | - frontend/: swing views |
+| | | - database/: JPAConfig |
+| | | - Dependencias actualizadas: frontend → backend.controller |
 
 ---
 

@@ -5,7 +5,6 @@ import com.finanzasapp.backend.controller.CuentaFinancieraController;
 import com.finanzasapp.backend.controller.GastoController;
 import com.finanzasapp.backend.controller.LoginController;
 import com.finanzasapp.backend.model.dto.UsuarioDTO;
-import com.finanzasapp.frontend.javafx.DashboardFX;
 import javax.swing.*;
 import java.awt.*;
 
@@ -159,20 +158,31 @@ public class MainView extends JFrame {
     }
 
     private void abrirDashboard() {
-        int opcion = JOptionPane.showConfirmDialog(this,
-            "¿Desea abrir el Dashboard JavaFX?\nSe abrirá en una nueva ventana.",
-            "Abrir Dashboard",
-            JOptionPane.YES_NO_OPTION);
-        
-        if (opcion == JOptionPane.YES_OPTION) {
-            try {
-                DashboardFX.main(new String[]{});
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(this,
-                    "Error al abrir Dashboard: " + ex.getMessage(),
-                    "Error",
-                    JOptionPane.ERROR_MESSAGE);
-            }
+        try {
+            contentPanel.removeAll();
+            
+            DashboardPanel dashboard = new DashboardPanel();
+            dashboard.setName("DASHBOARD");
+            
+            JButton btnVolver = new JButton("← Volver");
+            btnVolver.addActionListener(e -> mostrarCuentas());
+            JPanel southPanel = new JPanel();
+            southPanel.add(btnVolver);
+            
+            JPanel dashboardContainer = new JPanel(new BorderLayout());
+            dashboardContainer.add(dashboard, BorderLayout.CENTER);
+            dashboardContainer.add(southPanel, BorderLayout.SOUTH);
+            
+            contentPanel.add(dashboardContainer, "DASHBOARD");
+            contentPanel.revalidate();
+            contentPanel.repaint();
+            ((CardLayout) contentPanel.getLayout()).show(contentPanel, "DASHBOARD");
+            
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this,
+                "Error al cargar Dashboard: " + ex.getMessage(),
+                "Error",
+                JOptionPane.ERROR_MESSAGE);
         }
     }
 

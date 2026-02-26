@@ -35,7 +35,11 @@ Desarrollar una aplicación de escritorio en Java para gestión financiera perso
 
 ### 1.4 Funcionalidades Extra
 
-- Dashboard con gráficos JavaFX
+- **Dashboard financiero** con gráficos embebidos en Swing
+  - Gráfico circular: Gastos por categoría
+  - Gráfico de barras: Gastos mensuales
+  - Resumen financiero: Total gastos, saldo total, cuentas activas
+  - Dos implementaciones: JFreeChart (Swing puro) y JavaFX (embebido)
 - Exportación de reportes PDF y Excel
 - Sistema multi-moneda configurable en BD
 
@@ -315,12 +319,16 @@ src/main/java/com/finanzasapp/
 │       └── ValidationException.java
 │
 ├── frontend/                                   # Interfaz de usuario
-│   └── swing/                                 # GUI Swing
-│       ├── LoginView.java
-│       ├── MainView.java
-│       ├── GastoView.java
-│       ├── CuentaFinancieraView.java
-│       └── CategoriaGastoView.java
+│   ├── swing/                                 # GUI Swing principal
+│   │   ├── LoginView.java
+│   │   ├── MainView.java
+│   │   ├── GastoView.java
+│   │   ├── CuentaFinancieraView.java
+│   │   ├── CategoriaGastoView.java
+│   │   ├── DashboardPanel.java               # Dashboard con JFreeChart
+│   │   └── DashboardFXPanel.java            # Dashboard con JavaFX embebido
+│   └── javafx/                               # Dashboard JavaFX standalone
+│       └── DashboardFX.java
 │
 └── util/                                       # Utilidades
     └── JPAUtil.java

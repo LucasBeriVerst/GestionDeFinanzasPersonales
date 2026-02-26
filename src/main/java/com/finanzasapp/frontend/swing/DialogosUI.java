@@ -40,11 +40,17 @@ public class DialogosUI {
     }
 
     private static void mostrarMensaje(Component parent, String titulo, String mensaje, Color colorBoton, int tipoMensaje) {
-        JDialog dialog = crearDialogo(parent, titulo, 400, 180);
+        JDialog dialog = crearDialogo(parent, titulo, 420, 200);
         
         JPanel contentPanel = new JPanel(new BorderLayout(15, 15));
         contentPanel.setBackground(COLOR_CARD);
-        contentPanel.setBorder(new EmptyBorder(20, 20, 20, 20));
+        contentPanel.setBorder(BorderFactory.createCompoundBorder(
+            BorderFactory.createLineBorder(new Color(30, 30, 30), 3),
+            BorderFactory.createCompoundBorder(
+                BorderFactory.createMatteBorder(4, 0, 0, 0, colorBoton),
+                new EmptyBorder(20, 20, 20, 20)
+            )
+        ));
 
         JLabel lblIcono = new JLabel(getIcono(tipoMensaje));
         lblIcono.setPreferredSize(new Dimension(50, 50));
@@ -82,11 +88,14 @@ public class DialogosUI {
     }
 
     private static boolean mostrarConfirmacion(Component parent, String titulo, String mensaje) {
-        JDialog dialog = crearDialogo(parent, titulo, 400, 180);
+        JDialog dialog = crearDialogo(parent, titulo, 420, 200);
         
         JPanel contentPanel = new JPanel(new BorderLayout(15, 15));
         contentPanel.setBackground(COLOR_CARD);
-        contentPanel.setBorder(new EmptyBorder(20, 20, 20, 20));
+        contentPanel.setBorder(BorderFactory.createCompoundBorder(
+            BorderFactory.createLineBorder(new Color(30, 30, 30), 3),
+            new EmptyBorder(20, 20, 20, 20)
+        ));
 
         JLabel lblIcono = new JLabel("❓");
         lblIcono.setFont(new Font("Segoe UI", Font.PLAIN, 40));

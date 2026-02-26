@@ -43,7 +43,6 @@ public class LoginView extends JFrame {
         setPreferredSize(new Dimension(800, 600));
         setResizable(false);
         setExtendedState(JFrame.NORMAL);
-        setResizable(true);
 
         setLayout(new BorderLayout());
         setBackground(COLOR_BACKGROUND);

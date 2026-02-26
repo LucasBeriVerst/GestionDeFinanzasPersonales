@@ -56,9 +56,7 @@ public class DialogosUI {
             )
         ));
 
-        JLabel lblIcono = new JLabel(getIcono(tipoMensaje));
-        lblIcono.setPreferredSize(new Dimension(50, 50));
-        lblIcono.setHorizontalAlignment(SwingConstants.CENTER);
+        JPanel iconoPanel = crearIcono(tipoMensaje);
         
         JPanel textPanel = new JPanel(new BorderLayout(5, 5));
         textPanel.setOpaque(false);
@@ -78,7 +76,7 @@ public class DialogosUI {
         textPanel.add(lblTitulo, BorderLayout.NORTH);
         textPanel.add(lblMensaje, BorderLayout.CENTER);
         
-        contentPanel.add(lblIcono, BorderLayout.WEST);
+        contentPanel.add(iconoPanel, BorderLayout.WEST);
         contentPanel.add(textPanel, BorderLayout.CENTER);
         
         JButton btnAceptar = crearBoton("Aceptar", colorBoton);
@@ -105,10 +103,7 @@ public class DialogosUI {
             new EmptyBorder(20, 20, 20, 20)
         ));
 
-        JLabel lblIcono = new JLabel("❓");
-        lblIcono.setFont(new Font("Segoe UI", Font.PLAIN, 40));
-        lblIcono.setPreferredSize(new Dimension(50, 50));
-        lblIcono.setHorizontalAlignment(SwingConstants.CENTER);
+        JPanel iconoPanel = crearIcono(JOptionPane.QUESTION_MESSAGE);
         
         JPanel textPanel = new JPanel(new BorderLayout(5, 5));
         textPanel.setOpaque(false);
@@ -124,7 +119,7 @@ public class DialogosUI {
         textPanel.add(lblTitulo, BorderLayout.NORTH);
         textPanel.add(lblMensaje, BorderLayout.CENTER);
         
-        contentPanel.add(lblIcono, BorderLayout.WEST);
+        contentPanel.add(iconoPanel, BorderLayout.WEST);
         contentPanel.add(textPanel, BorderLayout.CENTER);
         
         final boolean[] resultado = {false};
@@ -192,13 +187,40 @@ public class DialogosUI {
         return boton;
     }
 
-    private static String getIcono(int tipo) {
+    private static JPanel crearIcono(int tipo) {
+        Color color;
+        String simbolo;
+        
         switch (tipo) {
-            case JOptionPane.ERROR_MESSAGE: return "❌";
-            case JOptionPane.WARNING_MESSAGE: return "⚠️";
-            case JOptionPane.INFORMATION_MESSAGE: return "ℹ️";
-            case JOptionPane.QUESTION_MESSAGE: return "❓";
-            default: return "ℹ️";
+            case JOptionPane.ERROR_MESSAGE:
+                color = COLOR_ERROR;
+                simbolo = "X";
+                break;
+            case JOptionPane.WARNING_MESSAGE:
+                color = COLOR_WARNING;
+                simbolo = "!";
+                break;
+            case JOptionPane.QUESTION_MESSAGE:
+                color = COLOR_PRIMARY;
+                simbolo = "?";
+                break;
+            default:
+                color = COLOR_SUCCESS;
+                simbolo = "✓";
         }
+        
+        JPanel panel = new JPanel(new GridBagLayout());
+        panel.setPreferredSize(new Dimension(50, 50));
+        panel.setBackground(color);
+        panel.setOpaque(true);
+        
+        JLabel label = new JLabel(simbolo);
+        label.setFont(new Font("Arial", Font.BOLD, 28));
+        label.setForeground(Color.WHITE);
+        label.setHorizontalAlignment(SwingConstants.CENTER);
+        
+        panel.add(label);
+        
+        return panel;
     }
 }

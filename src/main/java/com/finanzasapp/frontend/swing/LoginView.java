@@ -41,6 +41,8 @@ public class LoginView extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setMinimumSize(new Dimension(800, 600));
         setPreferredSize(new Dimension(800, 600));
+        setResizable(false);
+        setExtendedState(JFrame.NORMAL);
         setResizable(true);
 
         setLayout(new BorderLayout());

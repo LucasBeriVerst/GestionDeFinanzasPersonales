@@ -39,8 +39,8 @@ public class LoginView extends JFrame {
     private void initComponents() {
         setTitle("FinanzasApp - Iniciar Sesión");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setMinimumSize(new Dimension(450, 400));
-        setPreferredSize(new Dimension(500, 450));
+        setMinimumSize(new Dimension(800, 600));
+        setPreferredSize(new Dimension(800, 600));
         setResizable(true);
 
         setLayout(new BorderLayout());
@@ -185,8 +185,8 @@ public class LoginView extends JFrame {
 
     private void showRegisterDialog() {
         JDialog dialog = new JDialog(this, "Registrarse", true);
-        dialog.setMinimumSize(new Dimension(400, 350));
-        dialog.setPreferredSize(new Dimension(450, 380));
+        dialog.setMinimumSize(new Dimension(500, 450));
+        dialog.setPreferredSize(new Dimension(550, 500));
         dialog.setResizable(false);
         dialog.setLocationRelativeTo(this);
 

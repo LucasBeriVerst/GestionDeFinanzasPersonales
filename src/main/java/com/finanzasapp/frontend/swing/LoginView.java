@@ -166,7 +166,7 @@ public class LoginView extends JFrame {
         String password = new String(txtPassword.getPassword());
 
         if (username.isEmpty() || password.isEmpty()) {
-            mostrarError("Por favor complete todos los campos");
+            DialogosUI.mostrarError(this, "Por favor complete todos los campos");
             return;
         }
 
@@ -176,7 +176,7 @@ public class LoginView extends JFrame {
             mainView.setUsuarioActual(usuario);
             mainView.setVisible(true);
         } catch (Exception e) {
-            mostrarError(e.getMessage());
+            DialogosUI.mostrarError(this, e.getMessage());
         }
     }
 
@@ -275,17 +275,16 @@ public class LoginView extends JFrame {
             String email = txtEmail.getText().trim();
 
             if (username.isEmpty() || password.isEmpty()) {
-                mostrarError("Usuario y contraseña son obligatorios");
+                DialogosUI.mostrarError(dialog, "Usuario y contraseña son obligatorios");
                 return;
             }
 
             try {
                 loginController.registrarUsuario(username, password, email.isEmpty() ? null : email);
-                JOptionPane.showMessageDialog(dialog, "Usuario registrado exitosamente", 
-                    "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                DialogosUI.mostrarExito(dialog, "Usuario registrado exitosamente");
                 dialog.dispose();
             } catch (Exception ex) {
-                mostrarError(ex.getMessage());
+                DialogosUI.mostrarError(dialog, ex.getMessage());
             }
         });
 
@@ -321,10 +320,6 @@ public class LoginView extends JFrame {
         label.setFont(FONT_LABEL);
         label.setForeground(COLOR_TEXT);
         return label;
-    }
-
-    private void mostrarError(String mensaje) {
-        JOptionPane.showMessageDialog(this, mensaje, "Error", JOptionPane.ERROR_MESSAGE);
     }
 
     public void limpiarCampos() {

@@ -45,9 +45,9 @@ public class MainView extends JFrame {
 
     private void initComponents() {
         setTitle("FinanzasApp - Gestión Financiera");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(900, 600);
-        setResizable(true);
+        setMinimumSize(WindowUtil.getMinSize());
+        setPreferredSize(new Dimension(1024, 768));
+        WindowUtil.configurarVentanaPrincipal(this);
 
         setJMenuBar(createMenuBar());
 
@@ -179,20 +179,12 @@ public class MainView extends JFrame {
             ((CardLayout) contentPanel.getLayout()).show(contentPanel, "DASHBOARD");
             
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this,
-                "Error al cargar Dashboard: " + ex.getMessage(),
-                "Error",
-                JOptionPane.ERROR_MESSAGE);
+            DialogosUI.mostrarError(this, "Error al cargar Dashboard: " + ex.getMessage());
         }
     }
 
     private void cerrarSesion() {
-        int opcion = JOptionPane.showConfirmDialog(this, 
-            "¿Está seguro que desea cerrar sesión?", 
-            "Cerrar Sesión", 
-            JOptionPane.YES_NO_OPTION);
-        
-        if (opcion == JOptionPane.YES_OPTION) {
+        if (DialogosUI.confirmar(this, "¿Está seguro que desea cerrar sesión?")) {
             loginController.logout();
             dispose();
             LoginView login = new LoginView();

@@ -243,7 +243,7 @@ public class LoginView extends JFrame {
         formGbc.gridx = 0;
         formGbc.gridy = 2;
         formGbc.weightx = 0.3;
-        JLabel lblEmail = createLabel("Email:");
+        JLabel lblEmail = createLabel("Correo:");
         formPanel.add(lblEmail, formGbc);
         
         formGbc.gridx = 1;

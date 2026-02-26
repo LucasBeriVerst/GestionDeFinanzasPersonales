@@ -40,7 +40,11 @@ public class DialogosUI {
     }
 
     private static void mostrarMensaje(Component parent, String titulo, String mensaje, Color colorBoton, int tipoMensaje) {
-        JDialog dialog = crearDialogo(parent, titulo, 420, 200);
+        int lineas = mensaje.split("\n").length;
+        int altura = 180 + (lineas - 1) * 25;
+        altura = Math.min(altura, 400);
+        
+        JDialog dialog = crearDialogo(parent, titulo, 420, altura);
         
         JPanel contentPanel = new JPanel(new BorderLayout(15, 15));
         contentPanel.setBackground(COLOR_CARD);
@@ -63,7 +67,11 @@ public class DialogosUI {
         lblTitulo.setFont(FONT_TITLE);
         lblTitulo.setForeground(COLOR_TEXT);
         
-        JLabel lblMensaje = new JLabel("<html><body>" + mensaje + "</body></html>");
+        String mensajeFormateado = mensaje.replace("\n", "<br/>- ");
+        if (!mensajeFormateado.startsWith("<br/>")) {
+            mensajeFormateado = "- " + mensajeFormateado;
+        }
+        JLabel lblMensaje = new JLabel("<html><body>" + mensajeFormateado + "</body></html>");
         lblMensaje.setFont(FONT_MESSAGE);
         lblMensaje.setForeground(COLOR_TEXT);
         
